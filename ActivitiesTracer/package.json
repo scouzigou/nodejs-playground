@@ -1,0 +1,20 @@
+{
+	"name": "activities-tracer",
+	"version": "0.1.0",
+	"description": "Trace Activities during the day",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodejs app.js"
+	},
+	"keywords": [
+		"Activities",
+		"Time"
+	],
+	"author": "Stéphane Couzigou",
+	"license": "MIT",
+	"dependencies": {
+		"express":"^4.9.5",
+		"mongodb":"^2.1.0",
+		"body-parser":"^1.15.0"
+	}
+}
