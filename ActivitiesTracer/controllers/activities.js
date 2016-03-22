@@ -1,23 +1,32 @@
 // Manage Activities
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
+var assert = require('assert')
 var activity = require('../models/activity');
 
 router.get('/activity', function(req, res){
-	var activities = activity.getAll();
-	console.log(activities)
-	res.status(200).end()
-});
+	activity.getAll(function (err,docs){
+		if(err) return res.status(500).end()
+		res.setHeader('Content-Type', 'application/json')
+		res.json(docs)
+	})
+})
 
 router.get('/activity/:id', function(req, res){
-	var activity = activity.get(id);
-});
+	activity.get(req.params.id, function(err, activity){
+		if (err) return res.status(404).end()
+		res.setHeader('Content-Type', 'application/json')
+		res.json(activity)
+	})
+})
 
+// Create a new Activity
 router.post('/activity', function(req, res){
-	console.log("post /activity")
-	console.log(req.body())
-	res.status(200).end()
-
+	//req.body should be a json structure like this: {"name": "my-activity"}
+	activity.create(req.body, function(err, result, activity){
+		if(err) return res.status(500).end()
+		res.setHeader('Content-Type', 'application/json')
+		res.json(activity)
+	})
 })
 
 module.exports = router;

@@ -1,9 +1,13 @@
 var express = require('express')
+var bodyParser = require('body-parser')
 var app = express()
 var db = require('./db')
 
-app.use(require('body-parser'))
-app.use(require('./middlewares/log'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+	extended: true
+}))
+//app.use(require('./middlewares/log'))
 app.use(require('./controllers/activities'))
 
 // connect to mongodb before starting the app
